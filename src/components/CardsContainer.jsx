@@ -1,6 +1,8 @@
 import TCGdex from '@tcgdex/sdk';
 import { useEffect, useState } from 'react';
 
+import Card from './Card';
+
 // Instantiate the SDK
 const tcgdex = new TCGdex('en');
 
@@ -56,20 +58,15 @@ function CardsContainer() {
       }}>
       {cards === null ? 'Fetching card data...' : ''}
       {cards.map((pokemon) => (
-        <li key={pokemon.id}>
-          <button
-            onClick={() => {
-              const nextCards = [...cards];
-              shuffle(nextCards);
-              setCards(nextCards);
-            }}>
-            <img
-              src={`${pokemon.image}/high.webp`}
-              alt={`${pokemon.name}`}
-              style={{ width: '200px' }}
-            />
-          </button>
-        </li>
+        <Card
+          key={pokemon.id}
+          pokemon={pokemon}
+          shuffleCards={() => {
+            const nextCards = [...cards];
+            shuffle(nextCards);
+            setCards(nextCards);
+          }}
+        />
       ))}
     </ul>
   );
