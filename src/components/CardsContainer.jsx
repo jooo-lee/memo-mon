@@ -30,13 +30,20 @@ function CardsContainer() {
 
   useEffect(() => {
     const pokemonIds = [44, 45, 48, 50, 51, 52, 53, 56, 59, 60, 64, 68];
-    (async () => {
-      const response = await Promise.all(
-        pokemonIds.map((id) => tcgdex.fetch('cards', `ex16-${id}`))
-      );
-      shuffle(response);
-      setCards(response);
-    })();
+
+    const fetchCards = async () => {
+      try {
+        const response = await Promise.all(
+          pokemonIds.map((id) => tcgdex.fetch('cards', `ex16-${id}`))
+        );
+        shuffle(response);
+        setCards(response);
+      } catch (e) {
+        console.error('Error fetching card data', e);
+      }
+    };
+
+    fetchCards();
   }, []);
 
   return (
