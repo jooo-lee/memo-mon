@@ -29,6 +29,7 @@ function shuffle(array) {
 
 function CardsContainer() {
   const [cards, setCards] = useState([]);
+  const [showLoss, setShowLoss] = useState(false);
 
   useEffect(() => {
     const pokemonIds = [44, 45, 48, 50, 51, 52, 53, 56, 59, 60, 64, 68];
@@ -48,6 +49,16 @@ function CardsContainer() {
     fetchCards();
   }, []);
 
+  // Notify player that they lost
+  if (showLoss) {
+    return (
+      <>
+        <p>You lose!</p>
+        <button onClick={() => setShowLoss(false)}>Restart</button>
+      </>
+    );
+  }
+
   return (
     <ul
       style={{
@@ -66,6 +77,7 @@ function CardsContainer() {
             shuffle(nextCards);
             setCards(nextCards);
           }}
+          setShowLoss={setShowLoss}
         />
       ))}
     </ul>
