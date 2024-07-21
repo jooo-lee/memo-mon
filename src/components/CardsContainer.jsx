@@ -65,7 +65,7 @@ function CardsContainer() {
             }}>
             <img
               src={`${pokemon.image}/high.webp`}
-              alt=""
+              alt={`${pokemon.name}`}
               style={{ width: '200px' }}
             />
           </button>
