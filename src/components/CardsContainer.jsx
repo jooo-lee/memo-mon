@@ -1,5 +1,5 @@
 import TCGdex from '@tcgdex/sdk';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import Card from './Card';
 
@@ -27,13 +27,15 @@ function shuffle(array) {
   }
 }
 
-function CardsContainer({ setScore, updateHighScore }) {
+function CardsContainer({ setScore, setIsLoss }) {
   const [cards, setCards] = useState([]);
-  const [showLoss, setShowLoss] = useState(false);
+
+  const pokemonIds = useMemo(
+    () => [44, 45, 48, 50, 51, 52, 53, 56, 59, 60, 64, 68],
+    []
+  );
 
   useEffect(() => {
-    const pokemonIds = [44, 45, 48, 50, 51, 52, 53, 56, 59, 60, 64, 68];
-
     const fetchCards = async () => {
       try {
         const response = await Promise.all(
@@ -47,24 +49,7 @@ function CardsContainer({ setScore, updateHighScore }) {
     };
 
     fetchCards();
-  }, []);
-
-  // Notify player that they lost
-  if (showLoss) {
-    updateHighScore();
-    return (
-      <>
-        <p>You lose!</p>
-        <button
-          onClick={() => {
-            setScore(0);
-            setShowLoss(false);
-          }}>
-          Restart
-        </button>
-      </>
-    );
-  }
+  }, [pokemonIds]);
 
   return (
     <ul
@@ -84,8 +69,8 @@ function CardsContainer({ setScore, updateHighScore }) {
             shuffle(nextCards);
             setCards(nextCards);
           }}
-          setShowLoss={setShowLoss}
           setScore={setScore}
+          setIsLoss={setIsLoss}
         />
       ))}
     </ul>
