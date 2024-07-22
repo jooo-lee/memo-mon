@@ -27,7 +27,7 @@ function shuffle(array) {
   }
 }
 
-function CardsContainer() {
+function CardsContainer({ setScore, updateHighScore }) {
   const [cards, setCards] = useState([]);
   const [showLoss, setShowLoss] = useState(false);
 
@@ -51,10 +51,17 @@ function CardsContainer() {
 
   // Notify player that they lost
   if (showLoss) {
+    updateHighScore();
     return (
       <>
         <p>You lose!</p>
-        <button onClick={() => setShowLoss(false)}>Restart</button>
+        <button
+          onClick={() => {
+            setScore(0);
+            setShowLoss(false);
+          }}>
+          Restart
+        </button>
       </>
     );
   }
@@ -78,6 +85,7 @@ function CardsContainer() {
             setCards(nextCards);
           }}
           setShowLoss={setShowLoss}
+          setScore={setScore}
         />
       ))}
     </ul>
