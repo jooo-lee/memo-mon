@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Card({ pokemon, shuffleCards, setScore, setIsLoss }) {
+function Card({ pokemon, setScore, setIsLoss }) {
   const [clicked, setClicked] = useState(false);
 
   return (
@@ -12,7 +12,6 @@ function Card({ pokemon, shuffleCards, setScore, setIsLoss }) {
           } else {
             setClicked(true);
             setScore((prevScore) => prevScore + 1);
-            shuffleCards();
           }
         }}>
         <img
