@@ -21,9 +21,9 @@ function shuffle(array) {
   }
 }
 
-function CardsContainer({ cards, setScore, setIsLoss }) {
-  const nextCards = [...cards];
-  shuffle(nextCards);
+function CardsContainer({ pokémons, setScore, setIsLoss }) {
+  const nextPokémons = [...pokémons];
+  shuffle(nextPokémons);
 
   return (
     <ul
@@ -33,10 +33,10 @@ function CardsContainer({ cards, setScore, setIsLoss }) {
         flexWrap: 'wrap',
         justifyContent: 'center',
       }}>
-      {nextCards.map((pokemon) => (
+      {nextPokémons.map((pokémon) => (
         <Card
-          key={pokemon.id}
-          pokemon={pokemon}
+          key={pokémon.name}
+          pokémon={pokémon}
           setScore={setScore}
           setIsLoss={setIsLoss}
         />

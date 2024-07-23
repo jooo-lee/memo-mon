@@ -1,4 +1,3 @@
-import TCGdex from '@tcgdex/sdk';
 import { useState, useEffect } from 'react';
 
 import Header from './components/Header.jsx';
@@ -6,30 +5,49 @@ import CardsContainer from './components/CardsContainer.jsx';
 import LossDialog from './components/LossDialog.jsx';
 import WinDialog from './components/WinDialog.jsx';
 
-// Instantiate the SDK
-const tcgdex = new TCGdex('en');
-
-const pokemonIds = [44, 45, 48, 50, 51, 52, 53, 56, 59, 60, 64, 68];
+const pokémonNames = [
+  'exeggcute',
+  'koffing',
+  'tangela',
+  'gastly',
+  'shellder',
+  'magnemite',
+  'poliwag',
+  'oddish',
+  'kabuto',
+  'omanyte',
+  'voltorb',
+  'ditto',
+];
 
 function App() {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [isLoss, setIsLoss] = useState(false);
-  const [cards, setCards] = useState([]);
+  const [pokémons, setPokémons] = useState([]);
 
   useEffect(() => {
-    const fetchCards = async () => {
+    const fetchPokémon = async () => {
       try {
-        const response = await Promise.all(
-          pokemonIds.map((id) => tcgdex.fetch('cards', `ex16-${id}`))
+        const newPokémon = await Promise.all(
+          pokémonNames.map((name) =>
+            fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+              .then((response) => response.json())
+              .then((data) => {
+                return {
+                  name: name,
+                  imgUrl: data.sprites['front_default'],
+                };
+              })
+          )
         );
-        setCards(response);
+        setPokémons(newPokémon);
       } catch (e) {
         console.error('Error fetching card data', e);
       }
     };
 
-    fetchCards();
+    fetchPokémon();
   }, []);
 
   function updateHighScore() {
@@ -41,15 +59,14 @@ function App() {
   let mainContent;
   if (isLoss) {
     mainContent = <LossDialog setScore={setScore} setIsLoss={setIsLoss} />;
-  } else if (score >= pokemonIds.length) {
+  } else if (score >= pokémonNames.length) {
     // Player has won!
     updateHighScore();
     mainContent = <WinDialog setScore={setScore} />;
   } else {
     mainContent = (
       <CardsContainer
-        cards={cards}
-        setCards={setCards}
+        pokémons={pokémons}
         setScore={setScore}
         setIsLoss={setIsLoss}
       />
@@ -60,7 +77,7 @@ function App() {
     <>
       <Header score={score} highScore={highScore} />
       <main>
-        {cards.length === 0 ? 'Loading...' : ''}
+        {pokémons.length === 0 ? 'Loading...' : ''}
         {mainContent}
       </main>
     </>

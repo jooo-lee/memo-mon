@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Card({ pokemon, setScore, setIsLoss }) {
+function Card({ pokémon, setScore, setIsLoss }) {
   const [clicked, setClicked] = useState(false);
 
   return (
@@ -15,8 +15,8 @@ function Card({ pokemon, setScore, setIsLoss }) {
           }
         }}>
         <img
-          src={`${pokemon.image}/high.webp`}
-          alt={`${pokemon.name}`}
+          src={pokémon.imgUrl}
+          alt={pokémon.name}
           style={{ width: '200px' }}
         />
       </button>
