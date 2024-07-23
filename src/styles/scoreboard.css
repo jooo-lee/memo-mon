@@ -1,0 +1,13 @@
+.scoreboard {
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 700px) {
+  .scoreboard {
+    text-align: right;
+  }
+}
