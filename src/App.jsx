@@ -1,10 +1,10 @@
 import TCGdex from '@tcgdex/sdk';
 import { useState, useEffect } from 'react';
 
-import Header from './components/Header';
-import CardsContainer from './components/CardsContainer';
-import LossDialog from './components/LossDialog';
-import WinDialog from './components/WinDialog';
+import Header from './components/Header.jsx';
+import CardsContainer from './components/CardsContainer.jsx';
+import LossDialog from './components/LossDialog.jsx';
+import WinDialog from './components/WinDialog.jsx';
 
 // Instantiate the SDK
 const tcgdex = new TCGdex('en');

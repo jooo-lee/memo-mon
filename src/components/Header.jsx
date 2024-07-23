@@ -1,4 +1,4 @@
-import Scoreboard from './Scoreboard';
+import Scoreboard from './Scoreboard.jsx';
 
 function Header({ score, highScore }) {
   return (
