@@ -4,6 +4,7 @@ import Header from './components/Header.jsx';
 import CardsContainer from './components/CardsContainer.jsx';
 import LossDialog from './components/LossDialog.jsx';
 import WinDialog from './components/WinDialog.jsx';
+import './styles/App.css';
 
 const pokémonNames = [
   'exeggcute',
@@ -25,6 +26,7 @@ function App() {
   const [highScore, setHighScore] = useState(0);
   const [isLoss, setIsLoss] = useState(false);
   const [pokémons, setPokémons] = useState([]);
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     const fetchPokémon = async () => {
@@ -42,11 +44,12 @@ function App() {
           )
         );
         setPokémons(newPokémon);
+        setShowError(false);
       } catch (e) {
+        setShowError(true);
         console.error('Error fetching card data', e);
       }
     };
-
     fetchPokémon();
   }, []);
 
@@ -73,12 +76,18 @@ function App() {
     );
   }
 
+  const errorDiv = (
+    <div className="error">
+      <p>Something seems to have gone wrong!</p>
+    </div>
+  );
+
   return (
     <>
       <Header score={score} highScore={highScore} />
       <main>
-        {pokémons.length === 0 ? 'Loading...' : ''}
-        {mainContent}
+        {pokémons.length === 0 && !showError ? 'Loading...' : ''}
+        {showError ? errorDiv : mainContent}
       </main>
     </>
   );
