@@ -26,31 +26,40 @@ function App() {
   const [highScore, setHighScore] = useState(0);
   const [isLoss, setIsLoss] = useState(false);
   const [pokémons, setPokémons] = useState([]);
+  const [showLoading, setShowLoading] = useState(false);
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
-    const fetchPokémon = async () => {
-      try {
-        const newPokémon = await Promise.all(
-          pokémonNames.map((name) =>
-            fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-              .then((response) => response.json())
-              .then((data) => {
-                return {
-                  name: name,
-                  imgUrl: data.sprites['front_default'],
-                };
-              })
-          )
-        );
-        setPokémons(newPokémon);
-        setShowError(false);
-      } catch (e) {
-        setShowError(true);
-        console.error('Error fetching card data', e);
-      }
-    };
-    fetchPokémon();
+    if (!localStorage.getItem('pokémons')) {
+      setShowLoading(true);
+      const fetchPokémon = async () => {
+        try {
+          const newPokémons = await Promise.all(
+            pokémonNames.map((name) =>
+              fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+                .then((response) => response.json())
+                .then((data) => {
+                  return {
+                    name: name,
+                    imgUrl: data.sprites['front_default'],
+                  };
+                })
+            )
+          );
+          localStorage.setItem('pokémons', JSON.stringify(newPokémons));
+          setPokémons(newPokémons);
+          setShowError(false);
+          setShowLoading(false);
+        } catch (e) {
+          setShowLoading(false);
+          setShowError(true);
+          console.error('Error fetching card data', e);
+        }
+      };
+      fetchPokémon();
+    } else {
+      setPokémons(JSON.parse(localStorage.getItem('pokémons')));
+    }
   }, []);
 
   function updateHighScore() {
@@ -76,6 +85,12 @@ function App() {
     );
   }
 
+  const loadingDiv = (
+    <div className="loading">
+      <p>Loading...</p>
+    </div>
+  );
+
   const errorDiv = (
     <div className="error">
       <p>Something seems to have gone wrong!</p>
@@ -86,7 +101,7 @@ function App() {
     <>
       <Header score={score} highScore={highScore} />
       <main>
-        {pokémons.length === 0 && !showError ? 'Loading...' : ''}
+        {showLoading ? loadingDiv : ''}
         {showError ? errorDiv : mainContent}
       </main>
     </>

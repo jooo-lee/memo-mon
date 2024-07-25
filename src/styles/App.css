@@ -2,6 +2,7 @@ main {
   padding: 1rem;
 }
 
+.loading,
 .error {
   text-align: center;
 }
