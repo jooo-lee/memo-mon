@@ -1,0 +1,8 @@
+ul {
+  height: fit-content;
+  width: min(100%, 800px);
+  list-style: none;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, 200px);
+}

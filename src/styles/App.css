@@ -1,5 +1,9 @@
 main {
-  padding: 1rem;
+  flex: 1;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .loading,

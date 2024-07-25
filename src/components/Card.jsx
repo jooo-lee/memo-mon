@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
+import '../styles/Card.css';
+
 function Card({ pokémon, setScore, setIsLoss }) {
   const [clicked, setClicked] = useState(false);
 
   return (
-    <li>
+    <li className="card">
       <button
         onClick={() => {
           if (clicked) {
@@ -14,11 +16,7 @@ function Card({ pokémon, setScore, setIsLoss }) {
             setScore((prevScore) => prevScore + 1);
           }
         }}>
-        <img
-          src={pokémon.imgUrl}
-          alt={pokémon.name}
-          style={{ width: '200px' }}
-        />
+        <img src={pokémon.imgUrl} alt={pokémon.name} />
       </button>
     </li>
   );

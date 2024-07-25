@@ -1,4 +1,5 @@
 import Card from './Card.jsx';
+import '../styles/CardsContainer.css';
 
 /* 
 Fisher-Yates (aka Knuth) shuffle from:
@@ -26,13 +27,7 @@ function CardsContainer({ pokémons, setScore, setIsLoss }) {
   shuffle(nextPokémons);
 
   return (
-    <ul
-      style={{
-        listStyle: 'none',
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-      }}>
+    <ul>
       {nextPokémons.map((pokémon) => (
         <Card
           key={pokémon.name}
