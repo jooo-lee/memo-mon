@@ -18,7 +18,8 @@ function Card({ pokémon, setScore, setIsLoss }) {
               setScore((prevScore) => prevScore + 1);
             }
           }}>
-          <img src={pokémon.imgUrl} alt={pokémon.name} />
+          <img src={pokémon.imgUrl} alt="" />
+          <p className="pokémon-name">{pokémon.name}</p>
         </button>
       </li>
     </Tilt>
