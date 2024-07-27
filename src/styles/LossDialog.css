@@ -1,0 +1,28 @@
+.loss-dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 200px;
+  height: 150px;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+
+.loss-dialog > button {
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  background-color: rgb(27, 117, 208);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition-duration: 80ms;
+}
+
+@media (hover: hover) {
+  .loss-dialog > button:hover {
+    background-color: rgb(21, 92, 162);
+  }
+}

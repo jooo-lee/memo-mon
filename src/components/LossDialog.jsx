@@ -1,7 +1,9 @@
+import '../styles/LossDialog.css';
+
 function LossDialog({ setScore, setIsLoss }) {
   return (
-    <>
-      <p>You lose!</p>
+    <div className="loss-dialog">
+      <p>You lost! Try again.</p>
       <button
         onClick={() => {
           setScore(0);
@@ -9,7 +11,7 @@ function LossDialog({ setScore, setIsLoss }) {
         }}>
         Restart
       </button>
-    </>
+    </div>
   );
 }
 
