@@ -21,6 +21,10 @@
   transition-duration: 80ms;
 }
 
+.loss-dialog > button:focus-visible {
+  box-shadow: 0 0 0 3px inset;
+}
+
 @media (hover: hover) {
   .loss-dialog > button:hover {
     background-color: rgb(21, 92, 162);

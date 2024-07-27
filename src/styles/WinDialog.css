@@ -21,6 +21,10 @@
   transition-duration: 80ms;
 }
 
+.win-dialog > button:focus-visible {
+  box-shadow: 0 0 0 3px inset;
+}
+
 @media (hover: hover) {
   .win-dialog > button:hover {
     background-color: rgb(21, 92, 162);
