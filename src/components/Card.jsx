@@ -3,11 +3,15 @@ import Tilt from 'react-parallax-tilt';
 
 import '../styles/Card.css';
 
-function Card({ pokémon, setScore, setIsLoss }) {
+function Card({ pokémon, setScore, setIsLoss, tiltEnable }) {
   const [clicked, setClicked] = useState(false);
 
   return (
-    <Tilt glareEnable={true} glareMaxOpacity={0.45} glarePosition="all">
+    <Tilt
+      tiltEnable={tiltEnable}
+      glareEnable={tiltEnable}
+      glareMaxOpacity={0.45}
+      glarePosition="all">
       <li className="card">
         <button
           onClick={() => {

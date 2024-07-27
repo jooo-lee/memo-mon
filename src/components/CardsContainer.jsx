@@ -22,6 +22,15 @@ function shuffle(array) {
   }
 }
 
+// Returns whether or not user is using a touch screen device
+function isTouchDevice() {
+  return (
+    'ontouchstart' in window ||
+    navigator.maxTouchPoints > 0 ||
+    navigator.msMaxTouchPoints > 0
+  );
+}
+
 function CardsContainer({ pokémons, setScore, setIsLoss }) {
   const nextPokémons = [...pokémons];
   shuffle(nextPokémons);
@@ -34,6 +43,7 @@ function CardsContainer({ pokémons, setScore, setIsLoss }) {
           pokémon={pokémon}
           setScore={setScore}
           setIsLoss={setIsLoss}
+          tiltEnable={!isTouchDevice()}
         />
       ))}
     </ul>
