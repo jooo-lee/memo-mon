@@ -1,14 +1,16 @@
+import '../styles/WinDialog.css';
+
 function WinDialog({ setScore }) {
   return (
-    <>
-      <p>You win!</p>
+    <div className="win-dialog">
+      <p>You win! &#127881;</p>
       <button
         onClick={() => {
           setScore(0);
         }}>
         Restart
       </button>
-    </>
+    </div>
   );
 }
 
