@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import CardsContainer from './CardsContainer.jsx';
 import LossDialog from './LossDialog.jsx';
 import WinDialog from './WinDialog.jsx';
+import LoadingDiv from './LoadingDiv.jsx';
 import '../styles/MainContent.css';
 
 const pokémonNames = [
@@ -19,12 +20,6 @@ const pokémonNames = [
   'voltorb',
   'ditto',
 ];
-
-const loadingDiv = (
-  <div className="loading">
-    <p>Loading...</p>
-  </div>
-);
 
 const errorDiv = (
   <div className="error">
@@ -95,7 +90,7 @@ function MainContent({ score, setScore, highScore, setHighScore }) {
 
   return (
     <main>
-      {showLoading ? loadingDiv : ''}
+      {showLoading ? <LoadingDiv /> : ''}
       {showError ? errorDiv : mainContent}
     </main>
   );
