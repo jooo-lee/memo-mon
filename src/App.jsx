@@ -1,20 +1,23 @@
 import { useState } from 'react';
 
 import Header from './components/Header.jsx';
-import MainContent from './components/MainContent.jsx';
+import Main from './components/Main.jsx';
 
 function App() {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
 
+  function updateHighScore() {
+    if (score > highScore) setHighScore(score);
+  }
+
   return (
     <>
       <Header score={score} highScore={highScore} />
-      <MainContent
+      <Main
         score={score}
         setScore={setScore}
-        highScore={highScore}
-        setHighScore={setHighScore}
+        updateHighScore={updateHighScore}
       />
     </>
   );

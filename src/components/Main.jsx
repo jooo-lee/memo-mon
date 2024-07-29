@@ -22,7 +22,7 @@ const pokémonNames = [
   'ditto',
 ];
 
-function MainContent({ score, setScore, highScore, setHighScore }) {
+function Main({ score, setScore, updateHighScore }) {
   const [isLoss, setIsLoss] = useState(false);
   const [pokémons, setPokémons] = useState([]);
   const [showLoading, setShowLoading] = useState(false);
@@ -61,10 +61,6 @@ function MainContent({ score, setScore, highScore, setHighScore }) {
     }
   }, []);
 
-  function updateHighScore() {
-    if (score > highScore) setHighScore(score);
-  }
-
   let mainContent;
   if (isLoss) {
     updateHighScore();
@@ -91,4 +87,4 @@ function MainContent({ score, setScore, highScore, setHighScore }) {
   );
 }
 
-export default MainContent;
+export default Main;
