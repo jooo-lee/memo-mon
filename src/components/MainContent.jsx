@@ -4,6 +4,7 @@ import CardsContainer from './CardsContainer.jsx';
 import LossDialog from './LossDialog.jsx';
 import WinDialog from './WinDialog.jsx';
 import LoadingDiv from './LoadingDiv.jsx';
+import ErrorDiv from './ErrorDiv.jsx';
 import '../styles/MainContent.css';
 
 const pokémonNames = [
@@ -20,12 +21,6 @@ const pokémonNames = [
   'voltorb',
   'ditto',
 ];
-
-const errorDiv = (
-  <div className="error">
-    <p>Something seems to have gone wrong!</p>
-  </div>
-);
 
 function MainContent({ score, setScore, highScore, setHighScore }) {
   const [isLoss, setIsLoss] = useState(false);
@@ -91,7 +86,7 @@ function MainContent({ score, setScore, highScore, setHighScore }) {
   return (
     <main>
       {showLoading ? <LoadingDiv /> : ''}
-      {showError ? errorDiv : mainContent}
+      {showError ? <ErrorDiv /> : mainContent}
     </main>
   );
 }
