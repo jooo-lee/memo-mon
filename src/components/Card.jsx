@@ -3,7 +3,7 @@ import Tilt from 'react-parallax-tilt';
 
 import '../styles/Card.css';
 
-function Card({ pokémon, setScore, setIsLoss, tiltEnable }) {
+function Card({ pokémon, handleCardClick, tiltEnable }) {
   const [clicked, setClicked] = useState(false);
 
   return (
@@ -15,12 +15,8 @@ function Card({ pokémon, setScore, setIsLoss, tiltEnable }) {
       <li className="card">
         <button
           onClick={() => {
-            if (clicked) {
-              setIsLoss(true);
-            } else {
-              setClicked(true);
-              setScore((prevScore) => prevScore + 1);
-            }
+            handleCardClick(clicked);
+            setClicked(true);
           }}>
           <img src={pokémon.imgUrl} alt="" />
           <p className="pokémon-name">{pokémon.name}</p>

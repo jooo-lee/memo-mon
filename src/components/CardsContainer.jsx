@@ -31,7 +31,7 @@ function isTouchDevice() {
   );
 }
 
-function CardsContainer({ pokémons, setScore, setIsLoss }) {
+function CardsContainer({ pokémons, handleCardClick }) {
   const nextPokémons = [...pokémons];
   shuffle(nextPokémons);
 
@@ -41,8 +41,7 @@ function CardsContainer({ pokémons, setScore, setIsLoss }) {
         <Card
           key={pokémon.name}
           pokémon={pokémon}
-          setScore={setScore}
-          setIsLoss={setIsLoss}
+          handleCardClick={handleCardClick}
           tiltEnable={!isTouchDevice()}
         />
       ))}

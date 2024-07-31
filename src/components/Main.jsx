@@ -22,8 +22,13 @@ const pokémonNames = [
   'ditto',
 ];
 
-function Main({ score, setScore, updateHighScore }) {
-  const [isLoss, setIsLoss] = useState(false);
+function Main({
+  isLoss,
+  handleLoss,
+  isWin,
+  incrementScore,
+  handleRestartClick,
+}) {
   const [pokémons, setPokémons] = useState([]);
   const [showLoading, setShowLoading] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -61,21 +66,22 @@ function Main({ score, setScore, updateHighScore }) {
     }
   }, []);
 
+  function handleCardClick(prevClicked) {
+    if (prevClicked) {
+      handleLoss();
+    } else {
+      incrementScore(pokémonNames.length);
+    }
+  }
+
   let mainContent;
   if (isLoss) {
-    updateHighScore();
-    mainContent = <LossDialog setScore={setScore} setIsLoss={setIsLoss} />;
-  } else if (score >= pokémonNames.length) {
-    // Player has won!
-    updateHighScore();
-    mainContent = <WinDialog setScore={setScore} />;
+    mainContent = <LossDialog handleRestartClick={handleRestartClick} />;
+  } else if (isWin) {
+    mainContent = <WinDialog handleRestartClick={handleRestartClick} />;
   } else {
     mainContent = (
-      <CardsContainer
-        pokémons={pokémons}
-        setScore={setScore}
-        setIsLoss={setIsLoss}
-      />
+      <CardsContainer pokémons={pokémons} handleCardClick={handleCardClick} />
     );
   }
 
